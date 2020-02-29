@@ -1,0 +1,43 @@
+.grid_1 {
+    background-color:#346fee;
+}
+
+.grid_2 {
+
+}
+
+.grid_3 {
+
+}
+
+.grid_4 {
+
+}
+
+#navbar_login{
+    background-color: rgb(200, 0, 0);
+}
+
+#form_login{
+    padding: 2rem 0;
+}
+
+.cadastrar{
+    padding: 1.5rem 0;
+    text-decoration: none;
+    font-size: 0.8rem;
+    height: auto;
+}
+
+.cadastrar_taux{
+    padding: 2rem;
+}
+
+#cont_cadastro{
+    padding: 2rem 1rem;
+}
+
+.table-fix{
+    table-layout: fixed;
+    word-wrap: break-word;
+}
