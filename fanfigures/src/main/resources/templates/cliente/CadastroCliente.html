@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>pagina Inicial</title>
-<link rel="stylesheet" href="css/custom.css">
+<title>Cadastro Cliente</title>
+	<link rel="stylesheet" href="css/custom.css">
 <link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css"
 	rel="stylesheet">
 	<script th:src="@{/webjars/jquery/3.0.0/jquery.js}"></script>
 <script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
-
-
-	<!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Local CSS =
-    <link rel="stylesheet" href="css/custom.css"> -->
-</head>
 <body>
+
+<script language='JavaScript'>
+function SomenteNumero(e){
+    var tecla=(window.event)?event.keyCode:e.which;   
+    if((tecla>47 && tecla<58)) return true;
+    else{
+    	if (tecla==8 || tecla==0) return true;
+	else  return false;
+    }
+}
+</script>
 
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#26004d;">
 		<a class="navbar-brand" href="Index.jsp">
@@ -44,13 +49,13 @@
 		      </li>
 		       <li class="nav-item">
 		        <a class="nav-link" href="Login.jsp">Login</a>
-		      </li>		      
+		      </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Cadastros
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="CadastroProduto.html">Cadastro de produtos</a>
+		          <a class="dropdown-item" href="CadastroProduto.jsp">Cadastro de produtos</a>
 		          <a class="dropdown-item" href="CadastroFornecedor.jsp">Cadastro de fornecdor</a>	          
 		        </div>		        
 		      </li>	
@@ -63,19 +68,10 @@
 		          <a class="dropdown-item" href="GerenciamentoCliente.jsp">Gerenciar Clientes</a>
 		          <a class="dropdown-item" href="GerenciamentoFornecedor.jsp">Gerenciar Fornecedores</a>         
 		        </div>		        
-		      </li>			      	       	      		     
-		      <form method=get></form>		    
-		      <li class="nav-item">
-		        <a class="nav-link" >Bem vindo </a>
-		      </li> 		     
-		      <li class="nav-item">
-		        <a class="nav-link" href="Index.jsp?sair=<%=Generico.getSair()%>">Sair</a>
-		      </li>
-		    </ul>
-		   
+		      </li>		
 		  </div>
 	</nav>
-
+	
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	  <ol class="carousel-indicators">
 	    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -107,12 +103,126 @@
 	  </a>
 	</div>
 	
-	
-	
-	
-	
-	
-	<!-- Footer -->
+<div class="jumbotron">
+	<section id="Main Theme" class="container-fluid">
+        <div class="row">
+	        <div class="col-lg-6 offset-lg-3">
+	            <h2 class="text-center text-white">Cadastre-se</h2>
+	            <p class="lead text-center text-white">Fique tranquilo, nossa loja é segura</p>
+	            <hr>
+		            <form method="POST" th:object="${cliente}" th:action="@{/cliente/salvar}">
+		                <div class="form-group">
+		                    <h5 class="text-white">E-mail:</h5>
+		                    <input type="email" class="form-control" id="cadastro_email" placeholder="" required="true" maxlength="150"  th:field="*{email}">
+		                    <input type="hidden" th:field="*{id_usuario}" />
+		                </div>
+		                <div class="form-group">
+		                	<h5 class="text-white">Senha:</h5>
+		                    <input type="password" class="form-control" id="cadastro_senha" placeholder="" required="true" maxlength="30"  th:field="*{senha}">
+		                </div>
+			                <div class="row">
+			                    <div class="col-lg-6">
+			                        <div class="form-group">
+			                            <h5 class="text-white">CPF:</h5>
+			                            <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="11"  th:field="*{CPF}">
+			                        </div>
+			                    </div>
+			                 <div class="col-lg-6">
+		                    	<div class="form-group">
+		                        <h5 class="text-white">Sexo:</h5>	                        
+									  <select class="form-control" id="sel1"  th:field="*{Sexo}">
+									    <option value="M">Masculino</option>
+										<option value="F">Feminino</option>
+									  </select>	  
+								</div>                      
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <h5 class="text-white" >Nome completo:</h5>
+		                    <input type="text" class="form-control" id="cadastro_nome" placeholder="" required="true" maxlength="120"  th:field="*{nome_cliente}">
+		                </div>
+		                <div class="row">		                    
+		                    <div class="col-lg-12">
+		                    	<div class="form-group">
+		                         <h5 class="text-white">CEP:</h5>
+		                         <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="8"  th:field="*{cep}">                   
+		                    	</div>
+		                    </div>
+		                </div>
+		                   <div class="form-group">
+		                    	<h5 class="text-white" >Endereço:</h5>
+		                    <input type="text" class="form-control" id="cadastro_nome" placeholder="" required="true" maxlength="150"  th:field="*{Endereco}">
+		                </div>
+		                <div class="row">
+		                    <div class="col-lg-6">
+		                        <div class="form-group">
+		                        <h5 class="text-white" >Cidade:</h5>
+		                         <input type="text" class="form-control" id="cadastro_nome" placeholder="" required="true" maxlength="45" th:field="*{Cidade}">
+								</div>
+		                    </div>
+		                    <div class="col-lg-6">
+		                    	<div class="form-group">
+		                        <h5 class="text-white">Estado:</h5>	                        
+									  <select class="form-control" id="sel1"  th:field="*{Estado}">
+									    	<option value="AC">Acre</option>
+											<option value="AL">Alagoas</option>
+											<option value="AP">Amapá</option>
+											<option value="AM">Amazonas</option>
+											<option value="BA">Bahia</option>
+											<option value="CE">Ceará</option>
+											<option value="DF">Distrito Federal</option>
+											<option value="ES">Espírito Santo</option>
+											<option value="GO">Goiás</option>
+											<option value="MA">Maranhão</option>
+											<option value="MT">Mato Grosso</option>
+											<option value="MS">Mato Grosso do Sul</option>
+											<option value="MG">Minas Gerais</option>
+											<option value="PA">Pará</option>
+											<option value="PB">Paraíba</option>
+											<option value="PR">Paraná</option>
+											<option value="PE">Pernambuco</option>
+											<option value="PI">Piauí</option>
+											<option value="RJ">Rio de Janeiro</option>
+											<option value="RN">Rio Grande do Norte</option>
+											<option value="RS">Rio Grande do Sul</option>
+											<option value="RO">Rondônia</option>
+											<option value="RR">Roraima</option>
+											<option value="SC">Santa Catarina</option>
+											<option value="SP">São Paulo</option>
+											<option value="SE">Sergipe</option>
+											<option value="TO">Tocantins</option>
+									  </select>	  
+								</div>                      
+		                    </div>
+		               </div>
+		                    <div class="row">
+		                    <div class="col-lg-6">
+		                        <div class="form-group">
+		                            <h5 class="text-white">Telefone:</h5>
+		                            <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="10"  th:field="*{Telefone}">
+		                        </div>
+		                    </div>
+		                    <div class="col-lg-6">
+		                    	<div class="form-group">
+		                        <h5 class="text-white">Celular:</h5>	                        
+		                        <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="11" name="celular" >
+								</div>                      
+		                    </div>
+		                </div>
+
+		                <br>
+		                <input type="submit" value="Salvar" id="submit" class="btn btn-primary btn-lg btn-block" style="background-color:#26004d" /> 
+		                <p class="text-center cadastrar text-white">Já tem cadastro? <a href="Login.html" class="text-white">Entrar</a> 
+		                <p class="text-center cadastrar"> <a href="CadastroPessoaJuridica.jsp" class = "text-white">Não é pessoa física?</a></p>
+		            </form>
+	        </div>						  
+		</div>
+	</section>
+</div>
+
+
+
+<!-- Footer -->
 <footer class="page-footer font-small mdb-color lighten-3 pt-4" style="background-color:#26004d;">
 
     <!-- Footer Links -->
@@ -239,9 +349,10 @@
     <!-- Copyright -->
 
   </footer>
+ 
 
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>	
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

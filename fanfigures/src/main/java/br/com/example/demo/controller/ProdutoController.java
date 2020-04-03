@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.example.demo.Models.Produtos;
+import br.com.example.demo.Models.Produto;
 import br.com.example.demo.Repositories.ProdutosRepository;
 
 @Controller
-@RequestMapping("/produtos") //com isso todos os métodos dessa controller começam a partir de /produto
+@RequestMapping("/produto") //com isso todos os métodos dessa controller começam a partir de /produto
 public class ProdutoController {
 	
 	@Autowired
 	private ProdutosRepository produtosRepository;
 	
-	@RequestMapping(method=RequestMethod.GET, value = "/CadastroProdutos")
+	/*@RequestMapping(method=RequestMethod.GET, value = "produtos/CadastroProdutos")
 	public ModelAndView CadastroProdutos() 
 	{
 		ModelAndView mv = new ModelAndView("produto/CadastroProduto");
 		return mv;
-	}
+	}*/
 	
 	@GetMapping("/novo")
-	public ModelAndView novo(Produtos produto) {
+	public ModelAndView novo(Produto produto) {
 
 		ModelAndView modelAndView = new ModelAndView("produto/CadastroProduto");
 
@@ -40,7 +40,7 @@ public class ProdutoController {
 	}
 	
 	@PostMapping("/salvar")
-	public ModelAndView salvar(@Valid Produtos produto, BindingResult result, RedirectAttributes attributes)
+	public ModelAndView salvar(@Valid Produto produto, BindingResult result, RedirectAttributes attributes)
 	{
 
 		if (result.hasErrors()) 
@@ -50,7 +50,7 @@ public class ProdutoController {
 
 		attributes.addFlashAttribute("mensagem", "Produto salvo com sucesso!!");
 
-		return new ModelAndView("redirect:/CadastroProdutos");
+		return new ModelAndView("redirect:/produto/novo");
 
 	}
 }

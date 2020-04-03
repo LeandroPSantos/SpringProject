@@ -3,12 +3,12 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>Cadastro Produto</title>
-	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Local CSS -->
-    <link rel="stylesheet" href="css/custom.css">
-</head>
+<title>Cadastro Produtos</title>
+	<link rel="stylesheet" href="css/custom.css">
+<link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+	<script th:src="@{/webjars/jquery/3.0.0/jquery.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
 <body>
 
 	
@@ -125,7 +125,7 @@
         
         <h2 class="text-white">Cadastro de Produtos</h2>
 
-		<form method="POST" th:object="${produto}" th:action="@{/produtos/salvar}">
+		<form method="POST" th:object="${produto}" th:action="@{/produto/salvar}">
 		            <div class="card text-white bg-dark">
 		                <h5 class="card-header">Informações do produto</h5>
 		                <div class="card-body text-white bg-dark">
@@ -134,15 +134,15 @@
 			                        <div class="col-lg-8">
 			                            <div class="form-group">
 			                                <label for="cadastro_nome_produto">Nome do produto</label>
-			                                <input type="text" class="form-control" id="nome" th:field="nome" required="true" maxlength="45">
-			                                <input type="hidden" th:field="*{id}" />
+			                                <input type="text" class="form-control" id="nome" th:field="*{nome}" required="true" maxlength="45">
+			                                <input type="hidden" th:field="*{id_produto}" />
 			                            </div>
 			
 			                            <div class="row">
 			                                <div class="col-lg-9">
 			                                    <div class="form-group">
 			                                        <label for="cadastro_sku">Descrição do produto</label>
-			                                        <input type="text" class="form-control" id="descricao" th:field="descricao" placeholder="" required="true" maxlength="70">
+			                                        <input type="text" class="form-control" id="descricao" th:field="*{descricao}" placeholder="" required="true" maxlength="70">
 			                                    </div>
 			                                </div>
 			                                <div class="col-lg-3">
@@ -154,31 +154,31 @@
 												    		</select>
 												    	  -->
 											    	
-			                                       <input type="text" class="form-control" id="cod_fornecedor" th:field="cod_fornecedor" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'> 
+			                                       <input type="text" class="form-control" id="cod_fornecedor" th:field="*{cod_fornecedor}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'> 
 			                                    </div>
 			                                </div>
 			                                <div class="col-lg-2">
 			                                    <div class="form-group">
 			                                        <label for="cadastro_mpn">Tamanho</label>
-			                                        <input type="text" class="form-control" id="tamanho" th:field="tamanho" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'>
+			                                        <input type="text" class="form-control" id="tamanho" th:field="*{tamanho}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'>
 			                                    </div>
 			                                </div>
 			                                <div class="col-lg-2">
 			                                    <div class="form-group">
 			                                        <label for="cadastro_ncm">Peso</label>
-			                                        <input type="text" class="form-control" id="peso" th:field="peso" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'>
+			                                        <input type="text" class="form-control" id="peso" th:field="*{peso}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'>
 			                                    </div>
 			                                </div>
 			                                <div class="col-lg-3">
 			                                    <div class="form-group">
 			                                        <label for="cadastro_mpn">Material</label>
-			                                        <input type="text" class="form-control" id="material" th:field="material" placeholder="" required="true" maxlength="40">
+			                                        <input type="text" class="form-control" id="material" th:field="*{material}" placeholder="" required="true" maxlength="40">
 			                                    </div>
 			                                </div>
 			                                <div class="col-lg-5">
 			                                    <div class="form-group">
 			                                        <label for="cadastro_ncm">Fabricante</label>
-			                                        <input type="text" class="form-control" id="fabricante" th:field="fabricante" placeholder="" required="true" maxlength="70">
+			                                        <input type="text" class="form-control" id="fabricante" th:field="*{fabricante}" placeholder="" required="true" maxlength="70">
 			                                    </div>
 			                                </div>
 			                            </div>
@@ -193,7 +193,7 @@
 			                                            <div class="input-group-prepend">
 			                                                <span class="input-group-text bg-primary text-light">R$</span>
 			                                            </div>
-			                                            <input type="text" class="form-control" id="preco" th:field="preco" placeholder="" required="true" maxlength="10" onkeypress='return SomenteNumero(event)'>
+			                                            <input type="text" class="form-control" id="preco" th:field="*{preco}" placeholder="" required="true" maxlength="10" onkeypress='return SomenteNumero(event)'>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -204,7 +204,7 @@
 			                                            <div class="input-group-prepend">
 			                                                <span class="input-group-text bg-success text-light">EAN</span>
 			                                            </div>
-			                                            <input type="text" class="form-control" id="codigo_serie" th:field="codigo_serie" placeholder="" required="true" maxlength="20">
+			                                            <input type="text" class="form-control" id="codigo_serie" th:field="*{codigo_serie}" placeholder="" required="true" maxlength="20">
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -215,7 +215,7 @@
 			                                            <div class="input-group-prepend">
 			                                                <span class="input-group-text bg-success text-light">QTD</span>
 			                                           </div>
-			                                            <input type="text" class="form-control" id="estoque" th:field="estoque" placeholder="" required="true" maxlength="9" onkeypress='return SomenteNumero(event)'>
+			                                            <input type="text" class="form-control" id="estoque" th:field="*{estoque}" placeholder="" required="true" maxlength="9" onkeypress='return SomenteNumero(event)'>
 			                                        </div>
 			                                    </div>
 			                                </div>
@@ -230,7 +230,7 @@
 			                                    <p class="card-text">Escolha uma imagem em seu dispositivo. Está imagem irá ser carregada e será utilizada como imagem do produto.</p>
 			                                    <div class="form-group">
 			                                        <label for="uploadImage">Carregar Imagem</label>
-			                                        <input type="file" id="link_img" th:field="link_img" class="form-control-file" required="true" maxlength="255"/>
+			                                        <input type="file" id="link_img" th:field="*{link_img}" class="form-control-file" required="true" maxlength="255"/>
 			                                    </div>
 			                                 </div>
 			                                 <div class="card-footer bg-transparent border-light">Após preencher todas as informações, clique em Salvar.</div>
@@ -378,8 +378,8 @@
 
   </footer>
 
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>	
+	<script src="static/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="static/js/popper.min.js"></script>
+	<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>	
 </body>
 </html>
