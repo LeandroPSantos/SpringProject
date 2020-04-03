@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>Cadastro Produtos</title>
+<title>Lista Produtos</title>
 	<link rel="stylesheet" href="css/custom.css">
 <link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -122,135 +122,47 @@
 	<section id="Main Theme" class="container-fluid">
         <div class="row">
         	<div class="col-lg-12">
-        
-        <h2 class="text-white">Cadastro de Produtos</h2>
+				<h2 class="text-dark">Gerenciamento de Produtos</h2>	
+					
+				<div class="card text-white bg-dark">
+                	<h5 class="card-header">Informações</h5>
+                		<div class="card-body text-white bg-light">
 
-		<form method="POST" th:object="${produto}" th:action="@{/produto/salvar}">
-		            <div class="card text-white bg-dark">
-		                <h5 class="card-header">Informações do produto</h5>
-		                <div class="card-body text-white bg-dark">
-		                    <div class="row">
-		                        
-			                        <div class="col-lg-8">
-			                            <div class="form-group">
-			                                <label for="cadastro_nome_produto">Nome do produto</label>
-			                                <input type="text" class="form-control" id="nome" th:field="*{nome}" required="true" maxlength="45">
-			                                <input type="hidden" th:field="*{id_produto}" />
-			                            </div>
-			
-			                            <div class="row">
-			                                <div class="col-lg-9">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_sku">Descrição do produto</label>
-			                                        <input type="text" class="form-control" id="descricao" th:field="*{descricao}" placeholder="" required="true" maxlength="70">
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_gtin">Codigo do fornecedor</label>
-			                                        <!--<select class="form-control" id="sel1" name="codigoFornecedor" required="true">
-											    	
-												    		<option value="<%=rs.getString("id_fornecedor")%>"><%=rs.getString("id_fornecedor")%></option>
-												    		</select>
-												    	  -->
-											    	
-			                                       <input type="text" class="form-control" id="cod_fornecedor" th:field="*{cod_fornecedor}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'> 
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-2">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_mpn">Tamanho</label>
-			                                        <input type="text" class="form-control" id="tamanho" th:field="*{tamanho}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-2">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_ncm">Peso</label>
-			                                        <input type="text" class="form-control" id="peso" th:field="*{peso}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-3">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_mpn">Material</label>
-			                                        <input type="text" class="form-control" id="material" th:field="*{material}" placeholder="" required="true" maxlength="40">
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-5">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_ncm">Fabricante</label>
-			                                        <input type="text" class="form-control" id="fabricante" th:field="*{fabricante}" placeholder="" required="true" maxlength="70">
-			                                    </div>
-			                                </div>
-			                            </div>
-			
-			                            <hr>
-			
-			                            <div class="row">
-			                                <div class="col-lg-3">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_mpn">Preço de venda</label>
-			                                        <div class="input-group">
-			                                            <div class="input-group-prepend">
-			                                                <span class="input-group-text bg-primary text-light">R$</span>
-			                                            </div>
-			                                            <input type="text" class="form-control" id="preco" th:field="*{preco}" placeholder="" required="true" maxlength="10" onkeypress='return SomenteNumero(event)'>
-			                                        </div>
-			                                    </div>
-			                                </div>
-			                                <div class="col-lg-5">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_mpn">Código de serie</label>
-			                                        <div class="input-group">
-			                                            <div class="input-group-prepend">
-			                                                <span class="input-group-text bg-success text-light">EAN</span>
-			                                            </div>
-			                                            <input type="text" class="form-control" id="codigo_serie" th:field="*{codigo_serie}" placeholder="" required="true" maxlength="20">
-			                                        </div>
-			                                    </div>
-			                                </div>
-			                                 <div class="col-lg-4">
-			                                    <div class="form-group">
-			                                        <label for="cadastro_mpn">Estoque</label>
-			                                        <div class="input-group">
-			                                            <div class="input-group-prepend">
-			                                                <span class="input-group-text bg-success text-light">QTD</span>
-			                                           </div>
-			                                            <input type="text" class="form-control" id="estoque" th:field="*{estoque}" placeholder="" required="true" maxlength="9" onkeypress='return SomenteNumero(event)'>
-			                                        </div>
-			                                    </div>
-			                                </div>
-			                        	</div>         
-			                        </div>
-			                        
-			                        <div class="col-lg-4">                            
-			                            <div class="card text-white bg-dark mb-3">
-			                            	<div class="card-header"><h5>Carregar uma Imagem</h5></div>
-			                                <div class="card-body">
-			                                    <h6 class="card-title">Carregando uma imagem:</h6>
-			                                    <p class="card-text">Escolha uma imagem em seu dispositivo. Está imagem irá ser carregada e será utilizada como imagem do produto.</p>
-			                                    <div class="form-group">
-			                                        <label for="uploadImage">Carregar Imagem</label>
-			                                        <input type="file" id="link_img" th:field="*{link_img}" class="form-control-file" required="true" maxlength="255"/>
-			                                    </div>
-			                                 </div>
-			                                 <div class="card-footer bg-transparent border-light">Após preencher todas as informações, clique em Salvar.</div>
-			                            </div>
-		                        	</div>
-		                        
-		                    </div>
-		                </div>
-		            </div>
-		            <br>
-		            <input type="submit" value="Salvar" id="submit" class="btn btn-primary btn-lg float-right" />
-		           
-		        </form>          
+                    		<table class="table table-striped table-sm">
+                        		<thead>
+		                            <tr>
+		                                <th scope="col">Produto</th>
+		                                <th scope="col">Fabricante</th>
+		                                <th scope="col">Preço</th>
+		                                <th scope="col">Estoque</th>
+		                                <th scope="col"></th>
+		                            </tr>
+                        		</thead>
+	                        	<tbody>
+		                            <tr th:each="produto: ${produtos}">
+		                                <td>
+		                                <p class="mb-0" th:text="${produto.id_produto}"></p>
+		                                <p class="mb-0" th:text="${produto.codigo_serie}"></small></p>
+		                                </td>
+		                                <td th:text="${produto.fabricante}"><p></p></td>
+		                                 <td th:text="${produto.preco}"></p></td>
+		                                <td th:text="${produto.estoque}"></p></td>
+		                                <!--<td><p><a href="AlterarProduto.jsp?id_produto=<%=rs.getString("id_produto")%>"> Alterar </a></p></td>
+		                                  <td><p><button href="AlterarProduto.jsp?id_produto=<%=rs.getString("id_produto")%>" class="btn btn-success btn-lg float-right">Alterar</button></p></td>-->
+		                            </tr>		                           
+	                        	</tbody>	
+                    		</table>
+                		</div>
+            	</div>			  
+			</div>
 		</div>
-		</div>
-		</section>
-		</div>
-	
-	
-	<!-- Footer -->
+    </section>
+</div>
+
+
+
+
+<!-- Footer -->
 <footer class="page-footer font-small mdb-color lighten-3 pt-4" style="background-color:#26004d;">
 
     <!-- Footer Links -->
@@ -377,9 +289,11 @@
     <!-- Copyright -->
 
   </footer>
+ 
 
-	<script th:src="@{js/jquery-3.3.1.slim.min.js}"></script>
-    <script th:src="@{js/popper.min.js"}></script>
-    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script src="static/js/jquery-3.3.1.slim.min.js}"></script>
+    <script src="static/js/popper.min.js"}></script>
+    <script src="static/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

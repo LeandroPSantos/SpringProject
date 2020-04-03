@@ -22,12 +22,15 @@ public class ProdutoController {
 	@Autowired
 	private ProdutosRepository produtosRepository;
 	
-	/*@RequestMapping(method=RequestMethod.GET, value = "produtos/CadastroProdutos")
-	public ModelAndView CadastroProdutos() 
-	{
-		ModelAndView mv = new ModelAndView("produto/CadastroProduto");
-		return mv;
-	}*/
+	@GetMapping
+	public ModelAndView listar() {
+
+		ModelAndView modelAndView = new ModelAndView("produto/listaProdutos");
+
+		modelAndView.addObject("produtos", produtosRepository.findAll());
+
+		return modelAndView;
+	}
 	
 	@GetMapping("/novo")
 	public ModelAndView novo(Produto produto) {
