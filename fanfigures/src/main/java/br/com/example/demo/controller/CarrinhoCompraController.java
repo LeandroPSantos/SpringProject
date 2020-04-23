@@ -32,7 +32,7 @@ public class CarrinhoCompraController {
 			
 		Carrinho carrinho2 = new Carrinho();
 		carrinho2.setId_produto(2);
-		carrinho2.setNome_produto("produto 3"); 
+		carrinho2.setNome_produto("produto 4"); 
 		carrinho2.setQuantidade(1);
 		carrinho2.setValor_produto(10.00);
 		carrinho2.setValor_totalProd(carrinho2.getValor_produto() * carrinho2.getQuantidade());
