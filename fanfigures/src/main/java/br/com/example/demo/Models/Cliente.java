@@ -26,18 +26,10 @@ public class Cliente {
     private Date Data_nascimento;  
     
     private String Sexo;
-    
-    private String Endereco;
-    
-    private String Cidade;
-    
-    private String Estado;
-    
+     
 	private String Telefone;
     
-    private String Celular;
-    
-    private String cep;
+    private String Celular;       
     
     private String tipo_usuario;
     
@@ -115,30 +107,6 @@ public class Cliente {
 		Sexo = sexo;
 	}
 
-	public String getEndereco() {
-		return Endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		Endereco = endereco;
-	}
-
-	public String getCidade() {
-		return Cidade;
-	}
-
-	public void setCidade(String cidade) {
-		Cidade = cidade;
-	}
-
-	public String getEstado() {
-		return Estado;
-	}
-
-	public void setEstado(String estado) {
-		Estado = estado;
-	}
-
 	public String getTelefone() {
 		return Telefone;
 	}
@@ -153,14 +121,6 @@ public class Cliente {
 
 	public void setCelular(String celular) {
 		Celular = celular;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 
 	public String getTipo_usuario() {

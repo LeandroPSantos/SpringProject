@@ -11,41 +11,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.example.demo.Models.Cliente;
-import br.com.example.demo.Repositories.ClienteRepository;
+import br.com.example.demo.Models.Endereco;
+import br.com.example.demo.Repositories.EnderecoRepository;
 
 @Controller
-@RequestMapping("/cliente")
-public class ClienteController {
-	
+@RequestMapping("/endereco")
+public class EnderecoController {
+
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private EnderecoRepository enderecoRepository;
 	
 	
 	@GetMapping("/novo")
-	public ModelAndView novo(Cliente cliente) {       
+	public ModelAndView novo(Endereco endereco) {
 
-		ModelAndView modelAndView = new ModelAndView("cliente/CadastroCliente");
+		ModelAndView modelAndView = new ModelAndView("cliente/CadastroEndereco");
 
-		modelAndView.addObject(cliente);
+		modelAndView.addObject(endereco);
 
 		return modelAndView;
 	}
 	
 	@PostMapping("/salvar")
-	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes)
+	public ModelAndView salvar(@Valid Endereco endereco, BindingResult result, RedirectAttributes attributes)
 	{
 
 		if (result.hasErrors()) 
-			return novo(cliente);
+			return novo(endereco);
 		
-		cliente.setTipo_usuario("F");
-		clienteRepository.save(cliente);
+		enderecoRepository.save(endereco);
 
-		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!!");
+		attributes.addFlashAttribute("mensagem", "Endereço salvo com sucesso!!");
 
-		return new ModelAndView("redirect:/cliente/novo");
-
+		return new ModelAndView("redirect:/endereco/novo");
 	}
-	
 }
