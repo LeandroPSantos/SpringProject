@@ -123,17 +123,17 @@
         <div class="row">
         	<div class="col-lg-12">
         
-        <h2 class="text-white">Cadastro de Produtos</h2>
+        <h2 class="text-dark">Cadastro de Produtos</h2>
 
 		<form method="POST" th:object="${produto}" th:action="@{/produto/salvar}">
-		            <div class="card text-white bg-dark">
+		            <div class="card text-dark bg-light">
 		                <h5 class="card-header">Informações do produto</h5>
-		                <div class="card-body text-white bg-dark">
+		                <div class="card-body text-dark bg-light">
 		                    <div class="row">
 		                        
 			                        <div class="col-lg-8">
 			                            <div class="form-group">
-			                                <label for="cadastro_nome_produto">Nome do produto</label>
+			                                <label for="cadastro_nome_produto" class="text-dark">Nome do produto</label>
 			                                <input type="text" class="form-control" id="nome" th:field="*{nome}" required="true" maxlength="45">
 			                                <input type="hidden" th:field="*{id_produto}" />
 			                            </div>
@@ -378,8 +378,8 @@
 
   </footer>
 
-	<script th:src="@{js/jquery-3.3.1.slim.min.js}"></script>
+	<!--<script th:src="@{js/jquery-3.3.1.slim.min.js}"></script>
     <script th:src="@{js/popper.min.js"}></script>
-    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{bootstrap/js/bootstrap.bundle.min.js}"></script>-->
 </body>
 </html>

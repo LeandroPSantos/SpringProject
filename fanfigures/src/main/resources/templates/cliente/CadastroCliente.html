@@ -106,29 +106,29 @@ function SomenteNumero(e)
 	<section id="Main Theme" class="container-fluid">
         <div class="row">
 	        <div class="col-lg-6 offset-lg-3">
-	            <h2 class="text-center text-white">Cadastre-se</h2>
-	            <p class="lead text-center text-white">Fique tranquilo, nossa loja é segura</p>
+	            <h2 class="text-center text-dark">Cadastre-se</h2>
+	            <p class="lead text-center text-dark">Fique tranquilo, nossa loja é segura</p>
 	            <hr>
 		            <form method="POST" th:object="${cliente}" th:action="@{/cliente/salvar}">
 		                <div class="form-group">
-		                    <h5 class="text-white">E-mail:</h5>
+		                    <h5 class="text-dark">E-mail:</h5>
 		                    <input type="email" class="form-control" id="cadastro_email" placeholder="" required="true" maxlength="150"  th:field="*{email}">
-		                    <input type="hidden" th:field="*{id_usuario}" />
+		                    <input type="hidden" th:field="*{codigo}" />
 		                </div>
 		                <div class="form-group">
-		                	<h5 class="text-white">Senha:</h5>
+		                	<h5 class="text-dark">Senha:</h5>
 		                    <input type="password" class="form-control" id="cadastro_senha" placeholder="" required="true" maxlength="30"  th:field="*{senha}">
 		                </div>
 			                <div class="row">
 			                    <div class="col-lg-6">
 			                        <div class="form-group">
-			                            <h5 class="text-white">CPF:</h5>
+			                            <h5 class="text-dark">CPF:</h5>
 			                            <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="11"  th:field="*{CPF}">
 			                        </div>
 			                    </div>
 			                 <div class="col-lg-6">
 		                    	<div class="form-group">
-		                        <h5 class="text-white">Sexo:</h5>	                        
+		                        <h5 class="text-dark">Sexo:</h5>	                        
 									  <select class="form-control" id="sel1"  th:field="*{Sexo}">
 									    <option value="M">Masculino</option>
 										<option value="F">Feminino</option>
@@ -137,24 +137,40 @@ function SomenteNumero(e)
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    <h5 class="text-white" >Nome completo:</h5>
+		                    <h5 class="text-dark" >Nome completo:</h5>
 		                    <input type="text" class="form-control" id="cadastro_nome" placeholder="" required="true" maxlength="120"  th:field="*{nome_cliente}">
 		                </div>
 		                
 	                    <div class="row">
-	                    <div class="col-lg-6">
+	                    <div class="col-lg-4">
 	                        <div class="form-group">
-	                            <h5 class="text-white">Telefone:</h5>
+	                            <h5 class="text-dark">Telefone:</h5>
 	                            <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="10"  th:field="*{Telefone}">
 	                        </div>
 	                    </div>
-		                    <div class="col-lg-6">
+		                    <div class="col-lg-4">
 		                    	<div class="form-group">
-		                        	<h5 class="text-white">Celular:</h5>	                        
-		                        	<input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="11" name="celular" >
+		                        	<h5 class="text-dark">Celular:</h5>	                        
+		                        	<input type="number" class="form-control" id="cadastro_celular" placeholder="" onkeypress='return SomenteNumero(event)' maxlength="11" th:field="*{Celular}" >
+								</div>                      
+		                    </div>
+		                    <div class="col-lg-4">
+		                    	<div class="form-group">
+		                        	<h5 class="text-dark">Nascimento:</h5>	                        
+		                        	<input type="date" class="form-control" id="Data_nascimento" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="8" th:field="*{Data_nascimento}" >
 								</div>                      
 		                    </div>
 		                </div>
+		                
+		                <div class="form-row">
+							<th:block th:each="grupo : ${grupos}">
+								<div class="form-group custom-control custom-checkbox custom-control-inline">
+										<input type="checkbox" class="custom-control-input" name="grupo" th:value="${grupo.codigo}"
+											th:field="*{grupos}">
+								      	<label class="custom-control-label" th:for="${#ids.prev('grupos')}" th:text="${grupo.nome}">nome</label>
+							    </div>
+						    </th:block>
+						</div>
 
 		                <br>
 		                <input type="submit" value="Salvar" id="submit" class="btn btn-primary btn-lg btn-block" style="background-color:#26004d" /> 
