@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
 <title>pagina Inicial</title>
@@ -28,30 +30,31 @@
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <ul class="navbar-nav mr-auto">
 		      <li class="nav-item active">
-		        <a class="nav-link" href="Catalogo.jsp">Catálogo <span class="sr-only">(current)</span></a>
+		        <a class="nav-link" href="/inicio">Catálogo <span class="sr-only"></span></a>
 		      </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Minha Conta
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="Login.jsp">Logar</a>
-		          <a class="dropdown-item" href="CadastroPessoaFisica.jsp">Cadastra-se</a>
+		          <a class="dropdown-item" href="/login">Logar</a>
+		          <a class="dropdown-item" href="#">Cadastra-se</a>
 		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="Checkout.jsp">Meu carrinho</a>
-		          <a class="dropdown-item" href="MinhasCompras.jsp">Minhas Compras</a>
+		          <a class="dropdown-item" href="#">Meu carrinho</a>
+		          <a class="dropdown-item" href="#">Minhas Compras</a>
 		        </div>		        
 		      </li>
 		       <li class="nav-item">
-		        <a class="nav-link" href="Login.jsp">Login</a>
-		      </li>		      
+		        <a class="nav-link" href="/login">Login</a>
+		      </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Cadastros
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="CadastroProduto.html">Cadastro de produtos</a>
-		          <a class="dropdown-item" href="CadastroFornecedor.jsp">Cadastro de fornecdor</a>	          
+		          <a class="dropdown-item" href="/produto/Admin/novo">Cadastro de produtos</a>
+		          <a class="dropdown-item" href="/fornecedor/Admin/novo">Cadastro de fornecdor</a>	          
+		          <a class="dropdown-item" href="/cliente/Admin/novo">Cadastro de usuários</a>	          
 		        </div>		        
 		      </li>	
 		      <li class="nav-item dropdown">
@@ -59,20 +62,11 @@
 		          Gerenciamentos
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="GerenciamentoProduto.jsp">Gerenciar produtos</a>
-		          <a class="dropdown-item" href="GerenciamentoCliente.jsp">Gerenciar Clientes</a>
-		          <a class="dropdown-item" href="GerenciamentoFornecedor.jsp">Gerenciar Fornecedores</a>         
+		          <a class="dropdown-item" href="/produto/Admin/listar">listar produtos</a>
+		          <a class="dropdown-item" href="/cliente/Admin/listar">listar usuários</a>
+		          <a class="dropdown-item" href="/fornecedor/Admin/listar">listar Fornecedores</a>         
 		        </div>		        
-		      </li>			      	       	      		     
-		      <form method=get></form>		    
-		      <li class="nav-item">
-		        <a class="nav-link" >Bem vindo </a>
-		      </li> 		     
-		      <li class="nav-item">
-		        <a class="nav-link" href="Index.jsp?sair=<%=Generico.getSair()%>">Sair</a>
-		      </li>
-		    </ul>
-		   
+		      </li>		
 		  </div>
 	</nav>
 
