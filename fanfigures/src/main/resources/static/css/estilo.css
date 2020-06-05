@@ -1,0 +1,75 @@
+/*------- Logo do cliente -------*/
+.logocliente {
+	width: 30px;
+}
+
+centralizar {
+	margin-right: -50%;
+}
+
+/*------- Dados do usuário -------*/
+.nome-usuario {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+/*-----------------------------------------------------------*\
+  Error panel
+  - Para ser usado em páginas de erro simpls (404, 500, etc)
+\*-----------------------------------------------------------*/
+.iit-error-panel {
+	margin-top: 2em; 
+	background-color : #cbc9ca;
+	text-align: center;
+}
+
+.iit-error-panel__description {
+	display: block;
+	padding: 18px 0;
+}
+
+.iit-error-panel__code {
+	color: yellow;
+	font-size: 80px;
+	font-weight: normal;
+}
+
+/*
+##############################################
+# Campo com botão para ativar formulário Modal
+##############################################
+*/
+.iit-glyphicon-large {
+	font-size: 18px;
+}
+
+/* Field Action */
+.iit-field-action {
+	display: flex;
+}
+
+.iit-field-action__icon {
+	margin: 6px 0 0 5px;
+}
+
+.iit-btn-imagem {
+	padding: .15rem .55rem;
+	font-size: .775rem;
+	line-height: 1.3;
+	border-radius: .2rem;
+}
+
+/*
+################################################
+# Formatação das imagens antes de carregar
+################################################
+*/
+.image_upload_preview {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.imagem_produto_listagem {
+	max-width: 50px;
+	max-height: 50px;
+}

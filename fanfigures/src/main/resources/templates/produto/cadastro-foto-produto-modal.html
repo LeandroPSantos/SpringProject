@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="css/custom.css">
+<body>
+	<div class="modal fade" id="modalCadastroImagemProduto"
+		tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+		aria-hidden="true" th:fragment="modalImagemProduto">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="ModalLabel">Foto</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Fechar">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger d-none js-mensagem-cadastro-rapido-imagem_produto" role="alert">
+						<span th:text="${mensagem}"></span>
+					</div>
+					
+					
+						<div class="form-group form-row">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="inputFile" name="file"
+								onchange="document.getElementById('previewImage').src = window.URL.createObjectURL(this.files[0])">
+								<label class="custom-file-label" for="inputFile">Selecione a imagem do produto</label>
+							</div>
+						</div>
+					
+						<img class="image_upload_preview" id="previewImage" th:src="@{/img/produto-sem-imagem.jpg}" 
+							title="Imagem do Produto" />
+		
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary js-modal-cadastro-imagem_produto-salvar-btn">Salvar</button>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/js/cadastroRapidoImagemProduto.js}"></script>
+	</div>
+</body>
+</html>

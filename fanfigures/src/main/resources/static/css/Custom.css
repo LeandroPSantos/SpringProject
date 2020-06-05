@@ -41,3 +41,13 @@
     table-layout: fixed;
     word-wrap: break-word;
 }
+
+.image_upload_preview {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.imagem_produto_listagem {
+	max-width: 50px;
+	max-height: 50px;
+}

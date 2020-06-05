@@ -22,7 +22,7 @@ public class Produto {
 
 	private int estoque;
 
-	private String link_img;
+	private String url_imagem;
 
 	private int tamanho;
 
@@ -122,11 +122,11 @@ public class Produto {
 		this.estoque = estoque;
 	}
 
-	public String getLink_img() {
-		return link_img;
+	public String getUrl_imagem() {
+		return url_imagem;
 	}
 
-	public void setLink_img(String link_img) {
-		this.link_img = link_img;
+	public void setUrl_imagem(String url_imagem) {
+		this.url_imagem = url_imagem;
 	}
 }
