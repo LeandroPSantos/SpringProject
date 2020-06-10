@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>pagina Inicial</title>
+<title>Página Inicial</title>
 <link rel="stylesheet" href="css/custom.css">
-<link href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css"
+<link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"
 	rel="stylesheet">
-	<script th:src="@{/webjars/jquery/3.0.0/jquery.js}"></script>
-<script th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js}"></script>
+<link th:href="@{/webjars/font-awesome/5.12.0/css/all.css}" rel="stylesheet" />
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-	<!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Local CSS =
-    <link rel="stylesheet" href="css/custom.css"> -->
 </head>
 <body>
 
@@ -33,20 +31,15 @@
 		        <a class="nav-link" href="/inicio">Catálogo <span class="sr-only"></span></a>
 		      </li>
 		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Minha Conta
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="/login">Logar</a>
-		          <a class="dropdown-item" href="#">Cadastra-se</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">Meu carrinho</a>
-		          <a class="dropdown-item" href="#">Minhas Compras</a>
-		        </div>		        
-		      </li>
-		       <li class="nav-item">
-		        <a class="nav-link" href="/login">Login</a>
-		      </li>
+			      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+			        Dropdown link
+			      </a>
+			      <div class="dropdown-menu">
+			        <a class="dropdown-item" href="#">Link 1</a>
+			        <a class="dropdown-item" href="#">Link 2</a>
+			        <a class="dropdown-item" href="#">Link 3</a>
+			      </div>
+			   </li>
 		      <li class="nav-item dropdown">
 		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		          Cadastros
@@ -66,7 +59,42 @@
 		          <a class="dropdown-item" href="/cliente/Admin/listar">listar usuários</a>
 		          <a class="dropdown-item" href="/fornecedor/Admin/listar">listar Fornecedores</a>         
 		        </div>		        
-		      </li>		
+		      </li>
+		      </ul>
+		      <th:block sec:authorize="isAuthenticated()">
+		      
+		      <div class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Meus dados
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		          <a class="dropdown-item" href="#">Meu carrinho</a>
+		          <a class="dropdown-item" href="#">Minhas compras</a>
+		          <div class="dropdown-divider"></div>
+		          <a class="dropdown-item" href="#">Informações pessoais</a>
+		        </div>
+		      </div>
+		      
+				<form class="form-inline my-2 my-lg-0 user_name" th:action="@{/logout}"
+						method="post">
+						<i class="far fa-user"></i>&nbsp;
+						<div th:text="${#authentication.principal.usuario.nome_cliente}"></div>
+						&nbsp;
+						<button type="submit" class="btn btn-secondary my-2 my-sm-0">
+							<i class="fas fa-sign-out-alt"></i>&nbsp;Sair
+						</button>
+					</form>
+			</th:block>
+			<th:block sec:authorize="isAnonymous()">
+				<a class="nav-link" href="/cliente/novo">
+					<i class="fas fa-user-plus"></i>
+					Cadastrar
+				</a>
+				<a class="nav-link" href="/login">
+					<i class="fa fa-user icon"></i>
+					Login
+				</a>
+			</th:block>
 		  </div>
 	</nav>
 
@@ -118,7 +146,6 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>	
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -130,7 +157,6 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -142,7 +168,6 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>	
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -154,7 +179,6 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>	
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -166,7 +190,7 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>	
+		
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -178,7 +202,7 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>	
+				
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -190,7 +214,7 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>	
+		
 				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
@@ -202,7 +226,7 @@
 					    </div>
 					  </div>
 				  	</div>
-				  	</br>							  
+									  
 				</div>
 			</div>
 		</div>
@@ -226,7 +250,7 @@
 
           <!-- Content -->
           <h5 class="font-weight-bold text-uppercase mb-4 text-white">Loja</h5>
-          <h5><p class="text-white">A FanFigures é especializada na venda de artigos colecionáveis pela internet e tem alcançado cada vez mais clientes em todas as regiões do Brasil, sendo considerada uma referência nacional e uma das lojas mais respeitadas no segmento de colecionáveis.</p></h5>         
+          <h5 class="text-white">A FanFigures é especializada na venda de artigos colecionáveis pela internet e tem alcançado cada vez mais clientes em todas as regiões do Brasil, sendo considerada uma referência nacional e uma das lojas mais respeitadas no segmento de colecionáveis.</h5>         
 
         </div>
         <!-- Grid column -->
@@ -241,24 +265,24 @@
 
           <ul class="list-unstyled">
             <li>
-              <p>
+              
                 <h5><a href="Confiavel.jsp" class="text-white">FanFigures é confiável?</a></h5>
-              </p>
+             
             </li>
             <li>
-              <p>
+              
                 <h5><a href="Sobrenos.jsp" class="text-white">Sobre nós</a></h5>
-              </p>
+              
             </li>
             <li>
-              <p>
+              
                 <h5><a href="Politica.jsp" class="text-white">Politicas de Compra e Segurança</a></h5>
-              </p>
+              
             </li>
             <li>
-              <p>
+             
                 <h5><a href="contato.jsp" class="text-white">Contato</a></h5>
-              </p>
+              
             </li>
           </ul>
 
@@ -276,19 +300,19 @@
           <ul class="list-unstyled text-white">
             <li>
               <p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.4059512609138!2d-46.53186998545878!3d-23.661436384633237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce42890bca2dff%3A0x35bf8a86b5a032b3!2zQ29sw6lnaW8gUGVudMOhZ29ubw!5e0!3m2!1spt-BR!2sbr!4v1557808951632!5m2!1spt-BR!2sbr" width="300" height="" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3654.4059512609138!2d-46.53186998545878!3d-23.661436384633237!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce42890bca2dff%3A0x35bf8a86b5a032b3!2zQ29sw6lnaW8gUGVudMOhZ29ubw!5e0!3m2!1spt-BR!2sbr!4v1557808951632!5m2!1spt-BR!2sbr" width="300" height="" ></iframe>
             </li>
             <li>
-              <p>
-                <h5><i class="fas fa-envelope mr-3"></i> FanFiguresLoja@gmail.com</p></h5>
+              
+                <h5><i class="fas fa-envelope mr-3"></i> FanFiguresLoja@gmail.com</h5>
             </li>
             <li>
-              <p>
-                <h5><i class="fas fa-print mr-3"></i> +55 11 6841-8448</p></h5>
+             
+                <h5><i class="fas fa-print mr-3"></i> +55 11 6841-8448</h5>
             </li>
             <li>
-              <p>
-                <h5><i class="fas fa-print mr-3 "></i> +55 11 9875-2154</p></h5>
+              
+                <h5><i class="fas fa-print mr-3 "></i> +55 11 9875-2154</h5>
             </li>
           </ul>
 
@@ -313,7 +337,7 @@
       		
       		<!-- gmail -->
       		<a href="https://www.gmail.com"><img src="img/gmail.png" width="50" height="50" alt="gmail"></a><br>
-      		</br>
+      		
       		 <img src="https://api.siteblindado.com/v1/seal/aw/fantoy.com.br/seal.png">
       		
       		 <img src="img/bandeiras-mercadopago.png">
@@ -334,14 +358,10 @@
     <!-- Footer Links -->
 
     <!-- Copyright -->
-    <h5><div class="footer-copyright text-center py-3 text-white">© 2019 FANFINGURES COLECIONÁVEIS. CNPJ: 15.126.747/0001-68</h5>
-    </div>
+    <h5 class="footer-copyright text-center py-3 text-white">© 2019 FANFINGURES COLECIONÁVEIS. CNPJ: 15.126.747/0001-68</h5>
+    
     <!-- Copyright -->
 
-  </footer>
-
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>	
+  </footer>	
 </body>
 </html>

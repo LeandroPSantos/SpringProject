@@ -9,15 +9,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController 
 {
-	/*@RequestMapping(method=RequestMethod.GET, value = "/inicio")
-	public ModelAndView home() 
-	{
-		ModelAndView mv = new ModelAndView("Home");
-		return mv;
-	}*/
+	
 	@GetMapping("/inicio")
 	public String inicio() {
 		return "inicio";
 	}
 	
 }
+
