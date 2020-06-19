@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.example.demo.Models.Carrinho;
+import br.com.example.demo.Models.Generico;
 
 @Controller
 @RequestMapping("/carrinhoDeCompras") 
@@ -17,31 +21,68 @@ public class CarrinhoCompraController {
 	public ModelAndView listar() {
 
 		ModelAndView modelAndView = new ModelAndView("carrinhoCompra/CarrinhoDeCompra");
-  
-		ArrayList<Carrinho> ListaCarrinho = new ArrayList<Carrinho>();
+		System.out.println("voltou pra ca"); 
+		ArrayList<Carrinho> carrinhoLista = new ArrayList<>();
+		System.out.println("criou lista");
 		
-		Carrinho carrinho = new Carrinho();
+		if (Generico.carrinho == null)
+			System.out.println("ta vazio");
+		else	
+		    System.out.println("nao ta nulo");	
 		
-		carrinho.setId_produto(1);
-		carrinho.setNome_produto("produto 1");
-		carrinho.setQuantidade(2);
-		carrinho.setValor_produto(15.00);
-		carrinho.setValor_totalProd(carrinho.getValor_produto() * carrinho.getQuantidade());
-		
-		ListaCarrinho.add(carrinho);
+		int precototal = 0;
+		if(Generico.carrinho != null ) 
+		{
+			if(!Generico.carrinho.isEmpty()) 
+			{		
+				
+				for (Carrinho obj : Generico.carrinho) 
+				{
+					Carrinho objcarrinho = new Carrinho();
+					objcarrinho.setId_produto(obj.getId_produto());		
+					objcarrinho.setNome_produto(obj.getNome_produto());
+					objcarrinho.setQuantidade(obj.getQuantidade());
+					objcarrinho.setUrl_imagem(obj.getUrl_imagem());
+					objcarrinho.setValor_produto(obj.getValor_produto());
+					objcarrinho.setValor_totalProd(obj.getValor_totalProd());
+					
+					precototal += obj.getValor_totalProd();
+					carrinhoLista.add(objcarrinho);
+					
+				}
+			}
+		}
 			
-		Carrinho carrinho2 = new Carrinho();
-		carrinho2.setId_produto(2);
-		carrinho2.setNome_produto("produto 4"); 
-		carrinho2.setQuantidade(1);
-		carrinho2.setValor_produto(10.00);
-		carrinho2.setValor_totalProd(carrinho2.getValor_produto() * carrinho2.getQuantidade());
+		modelAndView.addObject("carrinho", carrinhoLista);
+		modelAndView.addObject("precototal", precototal);
 		
-		ListaCarrinho.add(carrinho2);
-		
-		modelAndView.addObject("ListaCarrinho", ListaCarrinho);
-		//modelAndView.addObject("carrinho", carrinho);
-
 		return modelAndView;
+		
+	}
+	
+	@PostMapping(value = "/excluir/{id}")
+	public String excluir(@PathVariable int id, RedirectAttributes attributes) {
+
+		System.out.println("chegou aqui na exclusao");
+		for (Carrinho obj : Generico.carrinho) 
+		{
+			System.out.println("entrou no for exclusao");
+			if(obj != null) 
+			{			
+				System.out.println("objeto não null");
+
+				if(obj.getId_produto() == id) 
+				{
+					System.out.println("achou o id na lista");
+					Generico.carrinho.remove(obj);
+					System.out.println("excluiu");
+					break;
+				}
+			}
+			else
+				System.out.println("objetonull");
+		}
+ 
+		return "redirect:/carrinhoDeCompras";
 	}
 }

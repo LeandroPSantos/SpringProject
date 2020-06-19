@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>Listar Produtos</title>
+<title>Detalhe do Produto</title>
 <link rel="stylesheet" href="css/custom.css">
 <link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"
 	rel="stylesheet">
@@ -15,37 +15,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
 </head>
-
 <script language='JavaScript'>
-function SomenteNumero(e)
-{
- 			var tecla=(window.event)?event.keyCode:e.which;   
- 			
-    if((tecla>47 && tecla<58)) 
-    	return true;
-    else
-    {
+function SomenteNumero(e){
+    var tecla=(window.event)?event.keyCode:e.which;   
+    if((tecla>47 && tecla<58)) return true;
+    else{
     	if (tecla==8 || tecla==0) return true;
-	else  
-		return false;
-  		}
-}
-
-function confirmarExclusao(e) 
-{
-	textoExclusao = 'Posso remover '
-		+ e + ' da base de dados?'
-
-	if (!confirm(textoExclusao)) 
-	{
-		return false;
-	} else
-	{
-		return true;
-	}
+	else  return false;
+    }
 }
 </script>
-
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#26004d;">
@@ -66,9 +45,9 @@ function confirmarExclusao(e)
 			        Dropdown link
 			      </a>
 			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="#">Link 1</a>
-			        <a class="dropdown-item" href="#">Link 2</a>
-			        <a class="dropdown-item" href="#">Link 3</a>
+			        <a class="dropdown-item" href="/carrinhoDeCompras">Carrinho de compras</a>
+			        <a class="dropdown-item" href="#">Meus Pedidos</a>
+			        <a class="dropdown-item" href="#">Minha conta</a>
 			      </div>
 			   </li>
 		      <li class="nav-item dropdown">
@@ -128,78 +107,102 @@ function confirmarExclusao(e)
 			</th:block>
 		  </div>
 	</nav>
-	
-		<div class="jumbotron">
-			<section id="Main Theme" class="container-fluid">
-		        <div class="row">
-		        	<div class="col-lg-12">
-						<h2 class="text-dark">Listagem de produtos</h2>	
-							
-						<div class="card text-white bg-dark">
-		                	<h5 class="card-header">Produtos</h5>
-		                		<div class="card-body text-white bg-light">
-		
-		                    		<table class="table table-striped table-sm">
-		                        		<thead>
-				                            <tr>
-				                                <th scope="col">Código</th>
-												<th scope="col">Nome Produto</th>
-												<th scope="col">Estoque</th>
-												<th scope="col" >Valor</th>
-												<th scope="col" >Imagem</th>
-												<th scope="col" class="text-center"> Ações </th>
-				                            </tr>
-		                        		</thead>
-			                        	<tbody>
-			                        	
-			                        		<tr th:if="${produtos.empty}">
-			                        			<td> 
-				                                	<p class="mb-0"> Não há produtos cadastrados.</p>
-				                                </td>
-			                        		</tr>
-			                        		 <tr th:each="produtos: ${produtos}">
-				                                <td>
-				                                <p class="mb-0" th:text="${produtos.id_produto}"></p>
-				                                </td>
-				                                <td th:text="${produtos.nome}"></p></td>
-				                                <td th:text="${produtos.estoque}"></p></td>
-				                                <td th:text="${produtos.preco}"></p></td>
-				                                <td class="text-center" th:if="${produtos.url_imagem}">
-													<img  id="imagemProduto" class="imagem_produto_listagem" 
-													th:src="@{/produto/imagem/{nome}(nome=${produtos.url_imagem})}"
-														title="Imagem do Produto" />
-												</td>
-												<td class="text-center" th:unless="${produtos.url_imagem}">
-													<img  id="imagemProduto" class="imagem_produto_listagem" 
-														th:src="@{/img/produto-sem-imagem.jpg}" title="Imagem do Produto" />
-												</td>
-				                                <td class="text-center">
-					                                <form method="POST"	th:action="@{/produto/Admin/excluir/{id}(id=${produtos.id_produto})}">
-													<a class="btn btn-primary btn-sm"
-														th:href="@{/produto/Admin/editar/{id}(id=${produtos.id_produto})}"
-														th:title="Editar"> <i class="fa fa-pencil-alt"></i>
-													</a>
-													<button th:data-nome="|o produto ${produtos.nome} com o codigo de série ${produtos.codigo_serie}|" 
-															type="submit" class="btn btn-danger btn-sm" 
-															onclick="return confirmarExclusao(this.getAttribute('data-nome'))" title="Excluir">
-														<span class="far fa-trash-alt"></span>
-													</button>
-													</form>
-												 <td class="text-center">	
-				                            </tr>		                           
-			                        	</tbody>	
-		                    		</table>                   		
-		                    		<p></p>
-		                		</div>
-		            	</div>			  
-					</div>
-				</div>
-		    </section>
+
+<div class="jumbotron">
+	<section id="Main Theme" class="container-fluid">
+        <div class="row">
+        	<div class="col-lg-10 offset-1 centered">
+        		
+				<div th:each="produto: ${produto}">
+	            	<div class="card text-white bg-dark">
+	               		<h6 class="card-header">Produto</h6>
+                		<div class="card-body text-white bg-dark">
+	                    	<div class="row">          
+		                        <div class="col-lg-8">
+		                            <div class="form-group">
+		                              <h5 th:text="${produto.nome}"></h5>
+		                            </div>		
+		                            <hr>
+		                            <div class="row">
+		                                <div class="col-lg-12">
+		                                    <div class="form-group">
+		                                      <h5>Descrição:</h5> <h5 th:text="${produto.descricao}"></h5>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="form-group">
+		                                       <h5>Tamanho (Em centímetros):</h5> <h5 th:text="${produto.tamanho}"></h5>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="form-group">
+		                                      <h5>Peso (Em gramas):</h5> <h5 th:text="${produto.peso}"></h5>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="form-group">
+		                                       <h5>Material do produto:</h5> <h5 th:text="${produto.material}"></h5>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-5">
+		                                    <div class="form-group">
+		                                      <h5>Fabricante:</h5> <h5 th:text="${produto.fabricante}"></h5>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                            <hr>
+		                            <form method="POST" th:object="${preCarrinho}" th:action="@{/DetalheProduto/AdicionarProdutoCarrinho}">	                               	                                
+		                            <div class="row">
+		                                <div class="col-lg-3">
+		                                    <div class="form-group">
+		                                      <label for="cadastro_mpn">Preço R$:</label><br> 
+		                                         <h5 th:text="${produto.preco}"> </h5>		                                        		                                        
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-2">
+		                           
+		                                <input type="hidden" th:value="${produto.id_produto}" name="idProduto"/>
+		                                </div> 
+		                                <div class="col-lg-3">
+		                                    <div class="form-group">
+		                                        <label for="cadastro_mpn">Quantidade</label>
+		                                        <input type="number" th:field="*{quantidade}" class="form-control" required="true" onkeypress='return SomenteNumero(event)' name="quantidade">	                                        
+		                                    </div>
+		                                </div>	
+		                                <div class="col-lg-4">
+		                                	 <input type="submit" value="Adicionar ao carrinho" id="submit" class="btn btn-success btn-lg float-right"/>
+		                                </div>                     
+		                        	</div> 
+		                        	</form>        
+		                        </div>                      
+		                    <div class="col-lg-4">                            
+	                            <div class="card text-white bg-dark mb-3">
+	                            <!--  <div class="card-header"><h5>Carregar uma Imagem</h5></div>-->
+	                            <div th:if="${produto.url_imagem}">
+								  <img  id="imagemProduto" class="card-img-top" 
+										th:src="@{/produto/imagem/{nome}(nome=${produto.url_imagem})}" title="Imagem do Produto" />
+								  </div>
+								  <div th:unless="${produto.url_imagem}">
+								  <img  id="imagemProduto" class="card-img-top" 
+										th:src="@{/img/produto-sem-imagem.jpg}" title="Imagem do Produto" />
+								  </div>
+	                            <div class="card-footer bg-transparent border-light">Foto do produto original</div>
+	                            </div>
+	                        </div>                        
+	                    </div>
+	                </div>
+	            </div>
+            <br>
+           
+           
+       		 </div> 
 		</div>
+		</div>
+	</section>
 
 
-
-
+</div>	
+	
 <!-- Footer -->
 <footer class="page-footer font-small mdb-color lighten-3 pt-4" style="background-color:#26004d;">
 

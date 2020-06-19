@@ -25,9 +25,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		/*http.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/inicio").permitAll()
+		.antMatchers("/DetalheProduto/**").permitAll()
 		.antMatchers("/produto/**").hasAnyRole("ADMINISTRADOR")
 		.antMatchers("/cliente/**").hasAnyRole("ADMINISTRADOR")
 		.antMatchers("/fornecedor/**").hasAnyRole("ADMINISTRADOR")
@@ -41,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.sessionManagement() // Controla a sessão
 			.maximumSessions(1) // O número máximo de sessões simultaneas para o mesmo usuário
-			.expiredUrl("/login"); // Chama a página escolhida no caso de exceder o nr. de acessos ao mesmo tempo
+			.expiredUrl("/login"); // Chama a página escolhida no caso de exceder o nr. de acessos ao mesmo tempo*/
 }
 
 	@Override

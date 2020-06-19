@@ -134,99 +134,39 @@
 	<section id="Main Theme" class="container-fluid">
         <div class="row">
         	<div class="col-lg-12">
-				<div class="card-deck">									
-					<div class="col-lg-3 col-md-4 col-sm-6 col-12">
+				<div class="card-deck">	
+					
+					<div th:if="${produtos.empty}">          			
+                    	<p class="mb-0"> Não há produtos cadastrados.</p>
+               		</div>
+												
+					<div th:each="produtos: ${produtos}" class="col-lg-3 col-md-4 col-sm-6 col-12">
 					  <br>
 					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
+					  <div th:if="${produtos.url_imagem}">
+					  <img  id="imagemProduto" class="card-img-top" 
+							th:src="@{/produto/imagem/{nome}(nome=${produtos.url_imagem})}" title="Imagem do Produto" />
+					  </div>
+					  <div th:unless="${produtos.url_imagem}">
+					  <img  id="imagemProduto" class="card-img-top" 
+							th:src="@{/img/produto-sem-imagem.jpg}" title="Imagem do Produto" />
+					  </div>
 					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
+					      <h5 class="card-title" th:text="${produtos.nome}"></h5>
+					       Valor R$: <h5 class="mb-0" th:text="${produtos.preco}"></h5>
+					       <a class="btn btn-success float-right"
+									th:href="@{/DetalheProduto/{id}(id=${produtos.id_produto})}"
+									th:title="Comprar"> <i class="fa fa-pencil-alt"></i>
+						   </a>
+					       <!-- <form method="POST"	th:action="@{/produto/Admin/excluir/{id}(id=${produtos.id_produto})}">
+								<a class="btn btn-success float-right"
+									th:href="@{/produto/Admin/editar/{id}(id=${produtos.id_produto})}"
+									th:title="Comprar"> <i class="fa fa-pencil-alt"></i>
+								</a>
+							</form>	 -->				      
 					    </div>
 					  </div>
-				  	</div>
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-		
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-				
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-		
-				  	<div class="col-lg-3 col-md-4 col-sm-6 col-12">
-					  <br>
-					  <div class="card">
-					    <img src="img/BannerIMG4.jpg" class="card-img-top">
-					    <div class="card-body">
-					      <h5 class="card-title">Produto xxx</h5>
-					      R$: R$ 35.00
-					      <a href="" class="btn btn-success float-right">Comprar</a>					      
-					    </div>
-					  </div>
-				  	</div>
-									  
+				  	</div>				  
 				</div>
 			</div>
 		</div>

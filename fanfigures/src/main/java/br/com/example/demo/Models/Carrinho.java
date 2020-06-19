@@ -14,6 +14,16 @@ public class Carrinho {
     
     private double valor_totalCarrinho;
     
+    private String url_imagem;
+    
+    public String getUrl_imagem() {
+		return url_imagem;
+	}
+
+	public void setUrl_imagem(String url_imagem) {
+		this.url_imagem = url_imagem;
+	}
+	
     public int getId_produto() {
 		return id_produto;
 	}
