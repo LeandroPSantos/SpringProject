@@ -39,6 +39,7 @@ public class DetalheProdutoController {
 		PreCarrinho precarrinho = new PreCarrinho();
 		modelAndView.addObject(precarrinho);
 		return modelAndView;
+		
 	}
 	
 	@PostMapping("/AdicionarProdutoCarrinho")

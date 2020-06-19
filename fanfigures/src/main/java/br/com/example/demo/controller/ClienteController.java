@@ -1,5 +1,7 @@
 package br.com.example.demo.controller;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.example.demo.Models.Carrinho;
 import br.com.example.demo.Models.Cliente;
+import br.com.example.demo.Models.Grupo;
 import br.com.example.demo.Repositories.ClienteRepository;
 import br.com.example.demo.Repositories.GrupoRepository;
 
@@ -89,6 +93,43 @@ public class ClienteController {
 		attributes.addFlashAttribute("mensagem", "Cliente excluido com sucesso!!");
 
 		return "redirect:/cliente/Admin/listar";
+	}
+	
+	@GetMapping("/novo")
+	public ModelAndView ClienteNovo(Cliente cliente) {       
+
+		ModelAndView modelAndView = new ModelAndView("cliente/ClienteCad");
+		modelAndView.addObject(cliente);
+
+		return modelAndView;
+	} 
+	 
+	@PostMapping("/salvar")
+	public ModelAndView ClenteSalvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes)    
+	{
+		if(clienteRepository.existsByEmail(cliente.getEmail()) && !clienteRepository.existsByCodigo(cliente.getCodigo())) 
+		{ 
+			result.rejectValue("email", "cliente.email.existente");
+		}
+				
+		if (result.hasErrors()) 
+			return ClienteNovo(cliente);
+		
+		cliente.setAtivo(true);
+		String senha = passwordEncoder.encode(cliente.getSenha());
+		cliente.setSenha(senha);
+		
+		Grupo grp = new Grupo();
+		long id = 3;
+		grp = grupos.getOne(id);
+		
+		ArrayList<Grupo> GrupoLista = new ArrayList<>();
+		GrupoLista.add(grp);
+		
+		cliente.setGrupos(GrupoLista);
+		clienteRepository.save(cliente);
+
+		return new ModelAndView("redirect:/login");
 	}
 	
 }

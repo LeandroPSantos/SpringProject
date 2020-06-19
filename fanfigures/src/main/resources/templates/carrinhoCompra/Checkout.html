@@ -4,7 +4,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>Carrinho de compras</title>
+<title>Checkout</title>
 <link rel="stylesheet" href="css/custom.css">
 <link th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"
 	rel="stylesheet">
@@ -43,6 +43,16 @@ function confirmarExclusao(e)
 	{
 		return true;
 	}
+	
+    function alterarDisable() {
+        var radios = document.getElementsByName("radio1");
+        if (radios[0].checked) {
+            document.getElementsByClass("form-group")[0].disabled = true;
+        }
+        else if (radios[1].checked) {
+            document.getElementsByClass("form-group")[0].disabled = false;
+        }
+    }
 }
 </script>
 
@@ -58,7 +68,10 @@ function confirmarExclusao(e)
 		    <ul class="navbar-nav mr-auto">
 		      <li class="nav-item active">
 		        <a class="nav-link" href="/inicio">Catálogo <span class="sr-only"></span></a>
-		      </li>	      
+		      </li>	  
+		      <li class="nav-item active">    
+		      <a class="nav-link" href="/Checkout">Teste Checkout <span class="sr-only"></span></a>
+		       </li>	
 		    </ul>
 		      
 		      <th:block sec:authorize="isAuthenticated()">
@@ -155,7 +168,107 @@ function confirmarExclusao(e)
 	<div class="jumbotron">
 	<section id="Main Theme" class="container-fluid">
         <div class="row">
-        	<div class="col-lg-12">
+        	<div class="col-md-4 order-md-2 mb-4">
+			          <h4 class="d-flex justify-content-between align-items-center mb-3">
+			            <span class="text-dark">Total: 13500,00 </span>
+			           <!--  <span class="badge badge-secondary badge-pill">3</span>--> 
+			          </h4>
+			          <ul class="list-group mb-3">
+			         
+			            <li class="list-group-item d-flex justify-content-between lh-condensed">
+			              <div>
+			                <h6 class="my-0"></h6>
+			                <small class="text-muted"> Batman</small>
+			              </div>
+			              <span class="text-muted"> R$: 4500</span>
+			            </li> 
+			             <li class="list-group-item d-flex justify-content-between lh-condensed">
+			              <div>
+			                <h6 class="my-0"></h6>
+			                <small class="text-muted"> Batman</small>
+			              </div>
+			              <span class="text-muted"> R$: 4500</span>
+			            </li> 
+			             <li class="list-group-item d-flex justify-content-between lh-condensed">
+			              <div>
+			                <h6 class="my-0"></h6>
+			                <small class="text-muted"> Batman</small>
+			              </div>
+			              <span class="text-muted"> R$: 4500</span>
+			            </li> 
+			            </ul> 
+			          <br>
+			          
+			          <h5 class="text-dark">Ainda não terminou? clique <a href="/inicio">aqui</a> para continuar comprando.</h5>
+			          <br>
+			 </div>
+			 
+        	 <div class="col-md-6 order-md-1 offset-1">	 
+	        	 <h4 class="d-flex justify-content-between align-items-center mb-3">
+	        	 <span class="text-dark">Checkout</span>   
+	        	 </h4>      
+		          <form method="POST" class="form-group">			
+		            <hr class="mb-4">
+		            <div>
+		              <h6 class="text-dark">Selecione o endereço de entrega:</h6>
+		              <br>
+		              <select class="form-control" id="sel1" required="true"  name="entregapadrao">
+					    	<option value="S">endereco 1</option>
+							<option value="N">endereco 2</option>											
+					  </select>
+		            </div>
+		            <hr class="mb-4">
+		
+		            <h4 class="mb-3 text-dark" >Dados pagamento</h4>
+					<input type="radio" name="radio1" value="entrada" onclick="alterarDisable()"> Pagamento Cartão
+					<input type="radio" name="radio1" value="saida" onclick="alterarDisable()"> Pagamento boleto
+					</br>
+					</br>
+		            <select class="form-dark" id="sel1" required="true"  name="tipopagamento">
+					    	<option value="C">Cartão de crédito</option>
+							<option value="D">Cartão de débito</option>											
+					</select>
+					</br>
+		            <div class="row">
+		              <div class="col-md-6 mb-3">
+		                <label for="cc-name" class="text-dark">Nome no cartão</label>
+		                <input type="text" class="form-control" id="cc-name" required="true" maxlength="50" name="nomecartao">
+		                <small class="text-dark">Full name as displayed on card</small>
+		                <div class="invalid-feedback">
+		                  Name on card is required
+		                </div>
+		              </div>
+		              <div class="col-md-6 mb-3">
+		                <label for="cc-number" class="text-dark">Número do cartão</label>
+		                <input type="text" class="form-control" id="cc-number" required="true" maxlength="16" onkeypress='return SomenteNumero(event)' name="numerocartao">
+		                <div class="invalid-feedback">
+		                  Credit card number is required
+		                </div>
+		              </div>
+		            </div>
+		            <div class="row">
+		              <div class="col-md-6 mb-3">
+		                <label for="cc-expiration" class="text-dark">Data validade</label>
+		                 <input type="date" class="form-control" id="cadastro_nascimento" name="datavalidadecartao">
+		                <div class="invalid-feedback">
+		                  Expiration date required
+		                </div>
+		              </div>
+		              <div class="col-md-6 mb-3">
+		                <label for="cc-expiration" class="text-dark">CVV</label>
+		                <input type="text" class="form-control" id="cc-cvv" required="true" maxlength="3" onkeypress='return SomenteNumero(event)' name="cvv">
+		                <div class="invalid-feedback">
+		                  Security code required
+		                </div>
+		              </div>
+		            </div>
+		            <hr class="mb-4">
+		            
+		            <input type="submit" value="Finalizar compra" id="submit" class="btn btn-success btn-lg btn-block" disabled="true"/>
+		            
+		          </form>
+			 </div>
+        	<!-- <div class="col-lg-12">
 				<h2 class="text-dark">Carrinho de compras</h2>	
 					
 				<div class="card text-white bg-dark">
@@ -221,7 +334,7 @@ function confirmarExclusao(e)
 				<form name="login" id="login" th:action="@{/login}" method="POST">
 					<input type="submit" class="btn btn-lg btn-success btn-block submit" id="login_m"  value="Comprar">
 	 			</form>
- 			</div>
+ 			</div> -->
 		</div>
     </section>
 </div>

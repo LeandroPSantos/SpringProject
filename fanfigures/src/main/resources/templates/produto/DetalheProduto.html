@@ -29,7 +29,7 @@ function SomenteNumero(e){
 
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#26004d;">
 		<a class="navbar-brand" href="Index.jsp">
-		   <img src="img/LogoFanFigure.png" width="auto" height="auto">
+		   <img th:src="@{img/LogoFanFigure.png}" width="auto" height="auto">
 	       </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
@@ -39,62 +39,56 @@ function SomenteNumero(e){
 		    <ul class="navbar-nav mr-auto">
 		      <li class="nav-item active">
 		        <a class="nav-link" href="/inicio">Catálogo <span class="sr-only"></span></a>
-		      </li>
-		      <li class="nav-item dropdown">
-			      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-			        Dropdown link
-			      </a>
-			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="/carrinhoDeCompras">Carrinho de compras</a>
-			        <a class="dropdown-item" href="#">Meus Pedidos</a>
-			        <a class="dropdown-item" href="#">Minha conta</a>
-			      </div>
-			   </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Cadastros
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="/produto/Admin/novo">Cadastro de produtos</a>
-		          <a class="dropdown-item" href="/fornecedor/Admin/novo">Cadastro de fornecdor</a>	          
-		          <a class="dropdown-item" href="/cliente/Admin/novo">Cadastro de usuários</a>	          
-		        </div>		        
-		      </li>	
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Gerenciamentos
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="/produto/Admin/listar">listar produtos</a>
-		          <a class="dropdown-item" href="/cliente/Admin/listar">listar usuários</a>
-		          <a class="dropdown-item" href="/fornecedor/Admin/listar">listar Fornecedores</a>         
-		        </div>		        
-		      </li>
-		      </ul>
+		      </li>	      
+		    </ul>
+		      
 		      <th:block sec:authorize="isAuthenticated()">
 		      
-		      <div class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Meus dados
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">Meu carrinho</a>
-		          <a class="dropdown-item" href="#">Minhas compras</a>
-		          <div class="dropdown-divider"></div>
-		          <a class="dropdown-item" href="#">Informações pessoais</a>
-		        </div>
-		      </div>
-		      
-				<form class="form-inline my-2 my-lg-0 user_name" th:action="@{/logout}"
-						method="post">
-						<i class="far fa-user"></i>&nbsp;
-						<div th:text="${#authentication.principal.usuario.nome_cliente}"></div>
-						&nbsp;
-						<button type="submit" class="btn btn-secondary my-2 my-sm-0">
-							<i class="fas fa-sign-out-alt"></i>&nbsp;Sair
-						</button>
-					</form>
+			      <div class="nav-item dropdown" sec:authorize="hasRole('ROLE_CLIENTE')">
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          Meus dados
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" href="/carrinhoDeCompras">Meu carrinho</a>
+			          <a class="dropdown-item" href="#">Minhas compras</a>
+			          <div class="dropdown-divider"></div>
+			          <a class="dropdown-item" href="#">Informações pessoais</a>
+			          <a class="dropdown-item" href="/endereco">Cadastrar novo endereço</a>
+			        </div>
+			      </div>
+		      		
+			      <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+			        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          Cadastros
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" href="/produto/Admin/novo">Cadastro de produtos</a>
+			          <a class="dropdown-item" href="/fornecedor/Admin/novo">Cadastro de fornecdor</a>	          
+			          <a class="dropdown-item" href="/cliente/Admin/novo">Cadastro de usuários</a>	          
+			        </div>		        
+			      </li>	
+			      <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+			        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			          Gerenciamentos
+			        </a>
+			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			          <a class="dropdown-item" href="/produto/Admin/listar">listar produtos</a>
+			          <a class="dropdown-item" href="/cliente/Admin/listar">listar usuários</a>
+			          <a class="dropdown-item" href="/fornecedor/Admin/listar">listar Fornecedores</a>         
+			        </div>		        
+			      </li>	
+		            
+				<form class="form-inline my-2 my-lg-0 user_name" th:action="@{/logout}" method="post">
+					<i class="far fa-user"></i>&nbsp;
+					<div th:text="${#authentication.principal.usuario.nome_cliente}"></div>
+					&nbsp;
+					<button type="submit" class="btn btn-secondary my-2 my-sm-0">
+						<i class="fas fa-sign-out-alt"></i>&nbsp;Sair
+					</button>
+				</form>
 			</th:block>
+			
+			
 			<th:block sec:authorize="isAnonymous()">
 				<a class="nav-link" href="/cliente/novo">
 					<i class="fas fa-user-plus"></i>
@@ -169,9 +163,23 @@ function SomenteNumero(e){
 		                                        <input type="number" th:field="*{quantidade}" class="form-control" required="true" onkeypress='return SomenteNumero(event)' name="quantidade">	                                        
 		                                    </div>
 		                                </div>	
-		                                <div class="col-lg-4">
+		                                
+		                                <th:block sec:authorize="isAuthenticated()">
+		                                <div class="col-lg-4" sec:authorize="hasRole('ROLE_ADMINISTRADOR')">
+		                                	 <input type="submit" value="Adicionar ao carrinho" id="submit" class="btn btn-success btn-lg float-right" disabled="true"/>
+		                                </div> 
+		                                <div class="col-lg-4" sec:authorize="hasRole('ROLE_CLIENTE')">
 		                                	 <input type="submit" value="Adicionar ao carrinho" id="submit" class="btn btn-success btn-lg float-right"/>
-		                                </div>                     
+		                                </div>  
+		                                </th:block>
+		                                
+		                                <th:block sec:authorize="isAnonymous()">		            
+		                                <div class="col-lg-4">
+		                                	 <input type="submit" value="Adicionar ao carrinho" id="submit" class="btn btn-success btn-lg float-right" disabled="true"/>
+		                                	 <h5>Não está logado? Clique <a href="/login">aqui</a> para logar. Não tem uma conta? clique <a href="/cliente/novo">aqui</a> para criar uma! </h5>
+		                                </div>  
+		                                </th:block>  
+		                                                               
 		                        	</div> 
 		                        	</form>        
 		                        </div>                      
