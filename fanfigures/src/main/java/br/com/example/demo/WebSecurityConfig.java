@@ -33,7 +33,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/cliente/salvar").permitAll()
 		.antMatchers("/produto/imagem/**").permitAll()
 		.antMatchers("/carrinhoDeCompras").hasAnyRole("CLIENTE")
-		.antMatchers("/endereco").hasAnyRole("CLIENTE")		
+		.antMatchers("/endereco").hasAnyRole("CLIENTE")	
+		.antMatchers("/Checkout").hasAnyRole("CLIENTE")	
+		.antMatchers("/Checkout/salvar").hasAnyRole("CLIENTE")	
+		.antMatchers("/cliente/MeusDados").hasAnyRole("CLIENTE")	
+		.antMatchers("/cliente/salvarEdit").hasAnyRole("CLIENTE")	
 		// fica faltando pra cliente logado = minhas compras e dados pessoais
 		.antMatchers("/produto/**").hasAnyRole("ADMINISTRADOR")
 		.antMatchers("/cliente/Admin/**").hasAnyRole("ADMINISTRADOR")
@@ -48,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.sessionManagement() // Controla a sessão
 			.maximumSessions(1) // O número máximo de sessões simultaneas para o mesmo usuário
-			.expiredUrl("/login"); // Chama a página escolhida no caso de exceder o nr. de acessos ao mesmo tempo
+			.expiredUrl("/login"); // Chama a página escolhida no caso de exceder o nr. de acessos ao mesmo tempo*/
 }
 
 	@Override

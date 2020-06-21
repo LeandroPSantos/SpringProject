@@ -57,10 +57,10 @@
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			          <a class="dropdown-item" href="/carrinhoDeCompras">Meu carrinho</a>
-			          <a class="dropdown-item" href="#">Minhas compras</a>
+			          <a class="dropdown-item" href="/MeusPedidos">Minhas compras</a>
 			          <div class="dropdown-divider"></div>
-			          <a class="dropdown-item" href="#">Informações pessoais</a>
-			          <a class="dropdown-item" href="/endereco">Cadastrar novo endereço</a>
+			          <a class="dropdown-item" href="/cliente/MeusDados">Informações pessoais</a>
+			          <a class="dropdown-item" href="/endereco/novo">Cadastrar novo endereço</a>
 			        </div>
 			      </div>
 		      		
@@ -134,10 +134,10 @@
 			                                </div>
 			                                <div class="col-lg-3">
 			                                    <div class="form-group">
-			                                        <label for="cadastro_gtin">Codigo do fornecedor</label>
-			                         
-											    	
-			                                       <input type="text" class="form-control" id="cod_fornecedor" th:field="*{cod_fornecedor}" placeholder="" required="true" maxlength="8" onkeypress='return SomenteNumero(event)'> 
+			                                        <label for="cadastro_gtin">Codigo do fornecedor</label>									    	
+			                                       <select class="form-control" name="id_fornecedor" required="true" th:field="*{cod_fornecedor}">
+					    								<option th:each="forn : ${fornecedor}" th:value="${forn.codigo}" th:utext="${forn.codigo + ' - ' + forn.nome_fornecedor + ' - cnpj: ' + forn.cnpj}"></option>										
+					 							   </select> 
 			                                    </div>
 			                                </div>
 			                                <div class="col-lg-2">

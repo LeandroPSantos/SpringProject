@@ -12,18 +12,28 @@ public class DetalhesVenda {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_detalheVenda;
 	
-	private int id_venda;
+	private int idVenda;
 	
     private int id_produto;    
     
     private int quantidade;
- 		
-	public int getId_venda() {
-		return id_venda;
+    
+    private double preco_produto; 
+    
+    public double getPrecoProduto() {
+		return preco_produto;
 	}
 
-	public void setId_venda(int id_venda) {
-		this.id_venda = id_venda;
+	public void setPrecoProduto(double preco_produto) {
+		this.preco_produto = preco_produto;
+	}
+ 		
+	public int getIdvenda() {
+		return idVenda;
+	}
+
+	public void setIdvenda(int idVenda) {
+		this.idVenda = idVenda;
 	}
 
     public int getId_detalheVenda() {

@@ -1,27 +1,21 @@
 package br.com.example.demo.Models;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-public class Venda {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class MinhasCompras {
+	
 	private int idVenda;
 	
 	private int idUsuario;
 	
-	@Column(name = "data_compra", columnDefinition = "DATE")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate datacompra;
 	
 	private String numero_pedido;
@@ -34,6 +28,16 @@ public class Venda {
 	
 	private double total_compra;
 	
+	private List<Produto> produtos;
+	
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	public int getIdvenda() {
 		return idVenda;
 	}
@@ -97,4 +101,5 @@ public class Venda {
 	public void setTotal_compra(double total_compra) {
 		this.total_compra = total_compra;
 	}
+
 }

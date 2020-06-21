@@ -69,10 +69,10 @@ function confirmarExclusao(e)
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			          <a class="dropdown-item" href="/carrinhoDeCompras">Meu carrinho</a>
-			          <a class="dropdown-item" href="#">Minhas compras</a>
+			          <a class="dropdown-item" href="/MeusPedidos">Minhas compras</a>
 			          <div class="dropdown-divider"></div>
-			          <a class="dropdown-item" href="#">Informações pessoais</a>
-			          <a class="dropdown-item" href="/endereco">Cadastrar novo endereço</a>
+			          <a class="dropdown-item" href="/cliente/MeusDados">Informações pessoais</a>
+			          <a class="dropdown-item" href="/endereco/novo">Cadastrar novo endereço</a>
 			        </div>
 			      </div>
 		      		
@@ -217,10 +217,16 @@ function confirmarExclusao(e)
 			<div class="col-lg-4 offset-lg-8"><h4>Preço total dos produtos do carrinho:</h4></div>
 			</p>
 			<div class="col-lg-2 offset-lg-8"><h5 th:text="${'R$: ' + precototal + ',00'}"> </h5></div>
-			<div class="col-lg-2 offset-lg-10">
-				<form name="login" id="login" th:action="@{/login}" method="POST">
-					<input type="submit" class="btn btn-lg btn-success btn-block submit" id="login_m"  value="Comprar">
-	 			</form>
+			<div class="col-lg-2 offset-lg-10" >
+				<th:block th:if="${carrinho.empty}">		      
+				
+		        </th:block>  
+		        <th:block th:unless="${carrinho.empty}">		            
+                            <a class="btn btn-success float-right"
+								th:href="@{/Checkout}"
+								th:title="Comprar"><i> Comprar</i></a> 
+		        </th:block> 
+				
  			</div>
 		</div>
     </section>

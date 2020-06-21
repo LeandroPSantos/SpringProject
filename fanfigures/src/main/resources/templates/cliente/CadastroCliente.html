@@ -25,6 +25,55 @@ function SomenteNumero(e)
 	else  return false;
     }
 }
+
+function verificarCPF(c){
+    var i;
+    s = c;
+    var c = s.substr(0,9);
+    var dv = s.substr(9,2);
+    var d1 = 0;
+    var v = false;
+ 	
+    if(c == "")
+    {
+    	document.getElementById("cadastro_email").focus();
+    }
+    else
+    {
+    	for (i = 0; i < 9; i++){
+            d1 += c.charAt(i)*(10-i);
+        }
+        if (d1 == 0){
+            alert("CPF Inválido")
+            v = true;
+            document.getElementById("cadastro_cpf").focus();
+            return false;
+        }
+        d1 = 11 - (d1 % 11);
+        if (d1 > 9) d1 = 0;
+        if (dv.charAt(0) != d1){
+            alert("CPF Inválido")
+            v = true;
+            document.getElementById("cadastro_cpf").focus();
+            return false;
+        }
+     
+        d1 *= 2;
+        for (i = 0; i < 9; i++){
+            d1 += c.charAt(i)*(11-i);
+        }
+        d1 = 11 - (d1 % 11);
+        if (d1 > 9) d1 = 0;
+        if (dv.charAt(1) != d1){
+            alert("CPF Inválido")
+            v = true;
+            document.getElementById("cadastro_cpf").focus();
+            return false;
+        }
+        
+    }
+    
+}
 </script>
 
 	<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#26004d;">
@@ -50,10 +99,10 @@ function SomenteNumero(e)
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			          <a class="dropdown-item" href="/carrinhoDeCompras">Meu carrinho</a>
-			          <a class="dropdown-item" href="#">Minhas compras</a>
+			          <a class="dropdown-item" href="/MeusPedidos">Minhas compras</a>
 			          <div class="dropdown-divider"></div>
-			          <a class="dropdown-item" href="#">Informações pessoais</a>
-			          <a class="dropdown-item" href="/endereco">Cadastrar novo endereço</a>
+			          <a class="dropdown-item" href="/cliente/MeusDados">Informações pessoais</a>
+			          <a class="dropdown-item" href="/endereco/novo">Cadastrar novo endereço</a>
 			        </div>
 			      </div>
 		      		
@@ -119,7 +168,7 @@ function SomenteNumero(e)
 			                    <div class="col-lg-6">
 			                        <div class="form-group">
 			                            <h5 class="text-dark">CPF:</h5>
-			                            <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' required="true" maxlength="11"  th:field="*{CPF}">
+			                            <input type="number" class="form-control" id="cadastro_cpf" placeholder="" onkeypress='return SomenteNumero(event)' onblur="return verificarCPF(this.value)" required="true" maxlength="11"  th:field="*{CPF}">
 			                        </div>
 			                    </div>
 			                 <div class="col-lg-6">

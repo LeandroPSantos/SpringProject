@@ -11,7 +11,7 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id_endereco;
 	
-	private int id_usuario;
+	private int idUsuario;
 	
 	private String Endereco;
 	
@@ -31,12 +31,12 @@ public class Endereco {
 		this.id_endereco = id_endereco;
 	}
     
-    public int getId_usuario() {
-		return id_usuario;
+    public int getIdUsuario() {
+		return idUsuario;
 	}
 
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 	
 	public String getEndereco() {

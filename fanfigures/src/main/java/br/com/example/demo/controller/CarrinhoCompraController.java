@@ -23,7 +23,7 @@ public class CarrinhoCompraController {
 		ModelAndView modelAndView = new ModelAndView("carrinhoCompra/CarrinhoDeCompra");
 		System.out.println("voltou pra ca"); 
 		ArrayList<Carrinho> carrinhoLista = new ArrayList<>();
-		System.out.println("criou lista");
+		System.out.println("criou lista"); 
 		
 		if (Generico.carrinho == null)
 			System.out.println("ta vazio");

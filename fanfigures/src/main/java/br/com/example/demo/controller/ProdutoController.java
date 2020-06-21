@@ -1,4 +1,4 @@
-package br.com.example.demo.controller;
+ package br.com.example.demo.controller;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.example.demo.Models.Produto;
+import br.com.example.demo.Repositories.FornecedorRepository;
 import br.com.example.demo.Repositories.ProdutosRepository;
 import br.com.example.demo.infra.fotoService;
 
@@ -31,6 +32,9 @@ public class ProdutoController {
 	
 	@Autowired
 	private ProdutosRepository produtosRepository;
+	
+	@Autowired
+	private FornecedorRepository fornecedorRepository;
 	
 	@Autowired
 	private fotoService foto_Service;
@@ -50,6 +54,7 @@ public class ProdutoController {
 
 		ModelAndView modelAndView = new ModelAndView("produto/CadastroProduto");
 
+		modelAndView.addObject("fornecedor", fornecedorRepository.findAll());
 		modelAndView.addObject(produto);
 
 		return modelAndView;
